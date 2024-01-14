@@ -4,6 +4,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .db import db
 
+
 class Todo(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str]
@@ -15,4 +16,6 @@ class Todo(db.Model):
 
     def __repr__(self):
         return f"Todo(title={self.title!r}, description={self.description!r}, done={self.done!r})"
-    
+
+    def as_dict(self):
+        return {}
