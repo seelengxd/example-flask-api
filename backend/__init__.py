@@ -1,7 +1,9 @@
 from flask import Flask
 
 from .models.db import db, add_db_setup_commands
-from .blueprints import auth, todos
+from .blueprints import auth
+from flask_restful import Api
+from .blueprints.todos import TodoList, Todo
 
 
 def create_app():
@@ -14,6 +16,9 @@ def create_app():
     add_db_setup_commands(app)
 
     app.register_blueprint(auth.bp)
-    app.register_blueprint(todos.bp)
+
+    api = Api(app)
+    api.add_resource(TodoList, '/todos')
+    api.add_resource(Todo, '/todos/<id>')
 
     return app

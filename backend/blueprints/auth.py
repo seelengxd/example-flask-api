@@ -71,10 +71,10 @@ def load_logged_in_user():
 
 def login_required(view):
     @functools.wraps(view)
-    def wrapped_view(**kwargs):
+    def wrapped_view(*args, **kwargs):
         if g.user is None:
             abort(401)
-        return view(**kwargs)
+        return view(*args, **kwargs)
     return wrapped_view
 
 

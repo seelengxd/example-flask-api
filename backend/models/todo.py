@@ -18,4 +18,14 @@ class Todo(db.Model):
         return f"Todo(title={self.title!r}, description={self.description!r}, done={self.done!r})"
 
     def as_dict(self):
-        return {}
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "done": self.done,
+            "user": {
+                "id": self.user.id,
+                "username": self.user.username
+            } if self.user else None
+
+        }
